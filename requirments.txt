@@ -1,0 +1,8 @@
+yt-dlp
+cratedigger
+python-telegram-bot
+spotdl
+scdl
+python-dotenv
+pandas
+requests
