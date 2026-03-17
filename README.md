@@ -1,69 +1,69 @@
 # TelegramMusicDownloader
 
-Ein Telegram-Bot, der Musik von **Spotify**, **SoundCloud** und **YouTube** herunterlädt. Einfach einen Link an den Bot senden und der Download startet automatisch.
+A Telegram bot that downloads music from **Spotify**, **SoundCloud**, and **YouTube**. Just send a link to the bot and the download starts automatically.
 
 ## Features
 
-- Spotify-Links (Tracks, Playlists, Alben) herunterladen
-- SoundCloud-Links herunterladen
-- YouTube-Videos/Playlists als MP3 herunterladen
-- Mehrere gleichzeitige Downloads (konfigurierbare Thread-Anzahl)
-- Download-Ordner per Telegram-Nachricht wechseln
-- Fehlgeschlagene Downloads erneut starten
-- Serato-Library-Sync via `/serato`
-- Download-Verlauf in CSV-Dateien
+- Download Spotify links (tracks, playlists, albums)
+- Download SoundCloud links
+- Download YouTube videos/playlists as MP3
+- Multiple simultaneous downloads (configurable thread count)
+- Change the download folder via Telegram message
+- Retry failed downloads
+- Serato library sync via `/serato`
+- Download history stored in CSV files
 
-## Voraussetzungen
+## Requirements
 
 - Python 3.9+
-- [ffmpeg](https://ffmpeg.org/download.html) installiert und im PATH
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) installiert
-- [scdl](https://github.com/flyingrub/scdl) installiert
-- Ein Telegram-Bot-Token (über [@BotFather](https://t.me/BotFather) erstellen)
+- [ffmpeg](https://ffmpeg.org/download.html) installed and available in PATH
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) installed
+- [scdl](https://github.com/flyingrub/scdl) installed
+- A Telegram bot token (create one via [@BotFather](https://t.me/BotFather))
 
 ## Installation
 
-1. Repository klonen:
+1. Clone the repository:
    ```bash
    git clone https://github.com/snroeust/TelegramMusicDownloader.git
    cd TelegramMusicDownloader
    ```
 
-2. Abhängigkeiten installieren:
+2. Install dependencies:
    ```bash
    pip install -r requirments.txt
    ```
 
-3. `.env`-Datei erstellen (siehe [Konfiguration](#konfiguration))
+3. Create a `.env` file (see [Configuration](#configuration))
 
-4. Bot starten:
+4. Start the bot:
    ```bash
    python main.py
    ```
 
-## Konfiguration
+## Configuration
 
-Alle sensiblen Daten und Einstellungen werden über eine `.env`-Datei verwaltet. Diese Datei wird **nicht** ins Repository committed (ist in `.gitignore` aufgeführt).
+All sensitive data and settings are managed through a `.env` file. This file is **not** committed to the repository because it is listed in `.gitignore`.
 
-### `.env`-Datei erstellen
+### Create the `.env` file
 
-Kopiere die Beispieldatei und trage deine Werte ein:
+Copy the example file and enter your values:
 
 ```bash
 cp .env.example .env
 ```
 
-### Umgebungsvariablen
+### Environment Variables
 
-| Variable | Beschreibung | Pflicht | Standard |
+| Variable | Description | Required | Default |
 |---|---|---|---|
-| `TELEGRAM_BOT_TOKEN` | Telegram Bot API Token (von @BotFather) | Ja | – |
-| `TELEGRAM_BOT_USERNAME` | Benutzername des Bots (z.B. `@MeinBot`) | Ja | – |
-| `THREAD_NUMBER` | Max. gleichzeitige Downloads | Nein | `5` |
-| `DOWNLOAD_PATH` | Standard-Download-Verzeichnis | Nein | `./songs` |
-| `LINK_LIBRARY_PATH` | Verzeichnis für die Link-CSV-Dateien | Nein | `./links` |
+| `TELEGRAM_BOT_TOKEN` | Telegram Bot API token (from @BotFather) | Yes | – |
+| `TELEGRAM_BOT_USERNAME` | Bot username (for example `@MyBot`) | Yes | – |
+| `THREAD_NUMBER` | Maximum number of simultaneous downloads | No | `5` |
+| `DOWNLOAD_PATH` | Default download directory | No | `./songs` |
+| `LINK_LIBRARY_PATH` | Directory for the link CSV files | No | `./links` |
 
-### Beispiel `.env`
+### Example `.env`
 
 ```env
 TELEGRAM_BOT_TOKEN=your-telegram-bot-token-here
@@ -73,41 +73,41 @@ DOWNLOAD_PATH=./songs
 LINK_LIBRARY_PATH=./links
 ```
 
-## Bot-Befehle
+## Bot Commands
 
-| Befehl | Beschreibung |
+| Command | Description |
 |---|---|
-| `/start` | Bot aktivieren |
-| `/stop` | Bot deaktivieren |
-| `/help` | Hilfe anzeigen |
-| `/showDir` | Aktuellen Download-Ordner anzeigen |
-| `/showDirs` | Alle verfügbaren Ordner anzeigen |
-| `/redownload` | Fehlgeschlagene Downloads erneut starten |
-| `/serato` | Serato-Library synchronisieren |
-| `/video` | YouTube-Video-Download an/aus |
+| `/start` | Activate the bot |
+| `/stop` | Deactivate the bot |
+| `/help` | Show help |
+| `/showDir` | Show the current download folder |
+| `/showDirs` | Show all available folders |
+| `/redownload` | Retry failed downloads |
+| `/serato` | Sync the Serato library |
+| `/video` | Toggle YouTube video download on/off |
 
-## Nutzung
+## Usage
 
-1. Bot mit `/start` aktivieren
-2. Einen Link von Spotify, SoundCloud oder YouTube senden
-3. Der Bot lädt den Song automatisch herunter
-4. Mit `switchFolder: ordnername` den Download-Ordner wechseln
+1. Activate the bot with `/start`
+2. Send a Spotify, SoundCloud, or YouTube link
+3. The bot downloads the song automatically
+4. Change the download folder with `switchFolder: foldername`
 
-## Projektstruktur
+## Project Structure
 
 ```
 TelegramMusicDownloader/
-├── main.py              # Bot-Logik und Telegram-Handler
-├── downloadLogic.py     # Download-Funktionen für Spotify, SoundCloud, YouTube
-├── utils.py             # Hilfsfunktionen (CSV-Verwaltung, Ordner-Listing)
-├── requirments.txt      # Python-Abhängigkeiten
-├── .env                 # Konfiguration (nicht im Repo)
-├── .env.example         # Beispiel-Konfiguration
-├── links/               # CSV-Dateien mit Download-Verlauf
+├── main.py              # Bot logic and Telegram handlers
+├── downloadLogic.py     # Download functions for Spotify, SoundCloud, YouTube
+├── utils.py             # Helper functions (CSV management, folder listing)
+├── requirments.txt      # Python dependencies
+├── .env                 # Configuration (not committed)
+├── .env.example         # Example configuration
+├── links/               # CSV files with download history
 │   ├── spotify.csv
 │   ├── soundcloud.csv
 │   └── youtube.csv
-└── songs/               # Heruntergeladene Songs
+└── songs/               # Downloaded songs
     ├── newSongs/
     └── songs/
 ```
